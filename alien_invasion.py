@@ -10,7 +10,8 @@ import pygame
 from settings import Settings
 from ship import Ship
 from arsenal import ShipArsenal
-from alien import Alien
+#from alien import Alien
+from alien_fleet import Alienfleet
 
 class AlienInvasion:
 
@@ -28,7 +29,7 @@ class AlienInvasion:
             )
         pygame.display.set_caption(self.settings.name)
 
-        #laod and scale the background image
+        #load and scale the background image
         self.bg = pygame.image.load(self.settings.bg_file)
         self.bg = pygame.transform.scale(self.bg, 
             (self.settings.screen_w, self.settings.screen_h)
@@ -44,7 +45,8 @@ class AlienInvasion:
 
 
         self.ship = Ship(self, ShipArsenal(self)) #initialize the ship with an arsenal
-        self.alien = Alien(self, 10, 10) #creating the enemy on the game 13
+        self.alien_fleet = Alienfleet(self)
+        self.alien_fleet.create_fleet() #creating the enemy on the game 13
 
 
     def run_game(self):
@@ -53,14 +55,14 @@ class AlienInvasion:
         while self.running:
             self._check_events() #open different types
             self.ship.update() #update ship position
-            self.alien.update() #updated the alien 13
+            #self.alien.update() #updated the alien 13
             self._update_screen()  #draw updated screen
             self.clock.tick(self.settings.FPS) 
 
     def _update_screen(self):
         """redraw the screen with updated elements"""
         self.screen.blit(self.bg, (0, 0)) 
-        self.alien.draw_alien()
+        self.alien_fleet.draw()
         self.ship.draw()    
            
         pygame.display.flip()

@@ -3,20 +3,20 @@ from pygame.sprite import Sprite #import sprite from bullet grouping
 from typing import TYPE_CHECKING #import type check for better IDE
 
 if TYPE_CHECKING:
-    from alien_invasion import AlienInvasion
+    from alien_fleet import AlienFleet
 
 
 class Alien(Sprite):
-    def __init__(self, game: 'AlienInvasion', x: float, y: float):
+    def __init__(self, fleet: 'AlienFleet', x: float, y: float):
         """Create a bullet object at the ship's position.
         
         Args:
             game (AlienInvasion): The game instance, providing settings and screen access.
         """
         super().__init__()
-        self.screen = game.screen #passing the screen
-        self.boundaries = game.screen.get_rect()
-        self.settings = game.settings    
+        self.screen = fleet.game.screen #passing the screen
+        self.boundaries = fleet.game.screen.get_rect()
+        self.settings = fleet.game.settings    
 
         self.image = pygame.image.load(self.settings.alien_file)
         self.image = pygame.transform.scale(self.image, 
