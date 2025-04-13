@@ -30,11 +30,14 @@ class Alien(Sprite):
 
         #self.rect.midright = game.ship.rect.midright #should be midright to change the dir of the bullet
         self.x = float(self.rect.x)
+        self.y = float(self.rect.y)#13
 
     def update(self):
         #self.x += self.settings.bullet_speed
         #self.rect.x = self.x
-        pass #just did that so it vcan stop moving
+        temp_speed = self.settings.fleet_speed#13
+        self.x += temp_speed
+        self.rect.x = self.x #update the rectangle 13
   
     def draw_alien(self):
         self.screen.blit(self.image, self.rect)
