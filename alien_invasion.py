@@ -55,7 +55,7 @@ class AlienInvasion:
         while self.running:
             self._check_events() #open different types
             self.ship.update() #update ship position
-            #self.alien.update() #updated the alien 13
+            self.alien_fleet.update_fleet() #updated the alien 13
             self._update_screen()  #draw updated screen
             self.clock.tick(self.settings.FPS) 
 

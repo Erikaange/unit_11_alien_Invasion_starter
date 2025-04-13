@@ -14,6 +14,7 @@ class Alien(Sprite):
             game (AlienInvasion): The game instance, providing settings and screen access.
         """
         super().__init__()
+        self.fleet = fleet
         self.screen = fleet.game.screen #passing the screen
         self.boundaries = fleet.game.screen.get_rect()
         self.settings = fleet.game.settings    
@@ -37,12 +38,8 @@ class Alien(Sprite):
         #self.rect.x = self.x
         temp_speed = self.settings.fleet_speed#13
 
-        if self.check_edges():
-            self.settings.fleet_direction *= -1 #if it hit the edge then changes the fleet direction to -1
-            self.y += self.settings.fleet_drop_speed
-
-
-        self.x += temp_speed * self.settings.fleet_direction
+        
+        self.x += temp_speed * self.fleet.fleet_direction
         self.rect.x = self.x #update the rectangle 13
         self.rect.y = self.y 
 

@@ -75,6 +75,25 @@ class Alienfleet:
 
         self.fleet.add(new_alien)
 
+    def _check_fleek_edges(self):
+        alien: Alien
+        for alien in self.fleet:
+            if alien.check_edges(): #make sure is checks the edge of the fleet
+                self._drop_alien_flett()
+                self.fleet_direction *= -1
+               
+                break #makes it to bounce back and forth
+
+            
+    def _drop_alien_flett(self):
+        for alien in self.fleet:
+            alien.y += self.fleet_drop_speed
+
+
+    def update_fleet(self):#update every thing of the aliens
+        self._check_fleek_edges()
+        self.fleet.update()
+
     def draw(self):
         alien: 'Alien' #type int of the variable
         for alien in self.fleet:
