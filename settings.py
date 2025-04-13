@@ -26,4 +26,11 @@ class Settings:
         self.bullet_w = 25
         self.bullet_h = 80
         self.bullet_amount = 100
+
+
+        #alien settings
+        self.alien_file = Path.cwd() /'Assets' / 'images' / 'howl.png'
+        self.alien_w = 40
+        self.alien_h = 40
+        self.fleet_speed = 5 #sets the fleet speed
     
