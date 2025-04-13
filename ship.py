@@ -35,11 +35,14 @@ class Ship:
 
         
         #this is where i will change the position of the ship
-        self.rect.midleft = self.boundaries.midleft #psotion ship at the middle left of the screen
+        self._center_ship()
         self.moving_up = False
         self.moving_down = False
-        self.y = float(self.rect.y)
         self.arsenal = arsenal
+
+    def _center_ship(self):
+        self.rect.midleft = self.boundaries.midleft #psotion ship at the middle left of the screen
+        self.y = float(self.rect.y)
         
 
 
@@ -67,3 +70,9 @@ class Ship:
 
     def fire(self):
         return self.arsenal.fire_bullet()
+    
+    def check_collisions(self, other_group): #check if we are colliding with any sprite
+        if pygame.sprite.spritecollideany(self, other_group):
+            self._center_ship() #if it has collision you center the ship
+            return True
+        return False

@@ -16,7 +16,7 @@ class Alienfleet:
         self.fleet_direction = self.settings.fleet_direction
         self.fleet_drop_speed = self.settings.fleet_drop_speed
 
-        self.create_fleet()
+        self.create_fleet() 
 
     def create_fleet(self):
         alien_w = self.settings.alien_w
@@ -84,7 +84,7 @@ class Alienfleet:
                
                 break #makes it to bounce back and forth
 
-            
+
     def _drop_alien_flett(self):
         for alien in self.fleet:
             alien.y += self.fleet_drop_speed
@@ -98,6 +98,16 @@ class Alienfleet:
         alien: 'Alien' #type int of the variable
         for alien in self.fleet:
             alien.draw_alien()   #the alien can draw itself 
+
+    def check_collisions(self, other_group):
+        return pygame.sprite.groupcollide(self.fleet, other_group, True, True)        
+    
+    def _check_fleet_bottom(self):
+        alien: Alien
+        for alien in self.fleet:
+            if alien.rect.bottom >= self.settings.screen_h: #i will change the dir to left 
+                return True
+        return False
 
 
 
