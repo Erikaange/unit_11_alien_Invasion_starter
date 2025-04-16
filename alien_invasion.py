@@ -55,8 +55,7 @@ class AlienInvasion:
         self.alien_fleet = Alienfleet(self)
         self.alien_fleet.create_fleet() #creating the enemy on the game 13
         self.game_active = True
-
-
+ 
     def run_game(self):
         """main game loop: handles events and updates"""
        

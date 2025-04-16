@@ -22,10 +22,11 @@ class Alien(Sprite):
         self.image = pygame.image.load(self.settings.alien_file)
         self.image = pygame.transform.scale(self.image, 
             (self.settings.alien_w, self.settings.alien_h))
-        self.image = pygame.transform.flip(self.image, True, False)   #fliped the image of the enemy to look at the ship 13     
+        #self.image = pygame.transform.flip(self.image, True, False)   #fliped the image of the enemy to look at the ship 13     
  
-        # Position the bullet at the midright side of the ship
+        # Position the alien at the midright side of the ship
         self.rect = self.image.get_rect()
+        
         self.rect.y = y
         self.rect.x = x #just added this updating the values to change
 
@@ -41,15 +42,15 @@ class Alien(Sprite):
         
         self.x += temp_speed * self.fleet.fleet_direction
         self.rect.x = self.x #update the rectangle 13
-        self.rect.y = self.y 
+        #self.rect.y = self.y 
 
     def check_edges(self): #to make sure the alien stays in the rectangle
-        return (self.rect.right >= self.boundaries.right or
-                self.rect.left <= self.boundaries.left)
+        return (self.rect.top <= self.boundaries.top or
+                self.rect.bottom >= self.boundaries.bottom)
 
   
     def draw_alien(self):
-        self.screen.blit(self.image, self.rect)
+        self.screen.blit(self.image, self.rect) #was self.rect i changed
 
 
         

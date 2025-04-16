@@ -9,7 +9,7 @@ if TYPE_CHECKING:
 class Alienfleet:
 
 
-    def __init__(self, game: 'AlienInvasion'):
+    def __init__(self, game: 'AlienInvasion'): 
         self.game = game
         self.settings = game.settings
         self.fleet = pygame.sprite.Group()
@@ -35,8 +35,12 @@ class Alienfleet:
     def _create_rectangle_fleet(self, alien_w, alien_h, fleet_w, fleet_h, x_offset, y_offset):
         for row in range(fleet_h):
             for col in range(fleet_w):
+                # Vertical placement along the right side
                 current_y = alien_h * row + y_offset
-                current_x = alien_w * col + x_offset
+
+            # Place aliens on the right edge, moving leftward
+                current_x = self.settings.screen_w - alien_w - x_offset  # Right side, no movement
+
                 if col % 2 == 0 or row % 2 == 0: #taking out every even number of alien
                     continue
                 self._create_alien(current_x, current_y)
@@ -79,13 +83,13 @@ class Alienfleet:
         alien: Alien
         for alien in self.fleet:
             if alien.check_edges(): #make sure is checks the edge of the fleet
-                self._drop_alien_flett()
+                self._drop_alien_fleet()
                 self.fleet_direction *= -1
                
                 break #makes it to bounce back and forth
 
 
-    def _drop_alien_flett(self):
+    def _drop_alien_fleet(self):
         for alien in self.fleet:
             alien.y += self.fleet_drop_speed
 
