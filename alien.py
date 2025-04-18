@@ -8,10 +8,13 @@ if TYPE_CHECKING:
 
 class Alien(Sprite):
     def __init__(self, fleet: 'AlienFleet', x: float, y: float):
-        """Create a bullet object at the ship's position.
-        
+        """
+        Initialize the alien and set its starting position.
+
         Args:
-            game (AlienInvasion): The game instance, providing settings and screen access.
+            fleet (AlienFleet): The fleet that this alien belongs to.
+            x (float): Initial horizontal position.
+            y (float): Initial vertical position.
         """
         super().__init__()
         self.fleet = fleet
@@ -19,49 +22,52 @@ class Alien(Sprite):
         self.boundaries = fleet.game.screen.get_rect()
         self.settings = fleet.game.settings    
 
+         # Load and transform the alien image
         self.image = pygame.image.load(self.settings.alien_file)
         self.image = pygame.transform.scale(self.image, 
             (self.settings.alien_w, self.settings.alien_h))
-        #self.image = pygame.transform.flip(self.image, True, False)   #fliped the image of the enemy to look at the ship 13     
+        
         self.image = pygame.transform.rotate(self.image, -90)
 
-        # Position the alien at the midright side of the ship
+        # Set the rectangle for positioning
         self.rect = self.image.get_rect()
-        
         self.rect.y = y
-        self.rect.x = x #just added this updating the values to change
+        self.rect.x = x 
 
-        #self.rect.midright = game.ship.rect.midright #should be midright to change the dir of the bullet
+        
         self.x = float(self.rect.x)
-        self.y = float(self.rect.y)#13
-        # self.move_up = False
+        self.y = float(self.rect.y)
+        self.move_up = False
 
         # Bouncing control
         self.original_y = y
         self.bounce_dir = 1  # 1 = down, -1 = up
 
     def update(self):
-        #self.x += self.settings.bullet_speed
-        #self.rect.x = self.x
-        temp_speed = self.settings.fleet_speed#13
-        
-
-        
+        """Update the alien's position both horizontally and with bounce effect."""
+        temp_speed = self.settings.fleet_speed
+    
         self.x += temp_speed * self.fleet.fleet_direction
-        self.rect.x = self.x #update the rectangle 13
+        self.rect.x = self.x #update the rectangle 
         
         
-        # self.y += temp_speed * self.settings.fleet_y_dir
+        
         # Vertical bounce movement
         self.y += self.settings.alien_bounce_speed * self.bounce_dir
         if abs(self.y - self.original_y) >= self.settings.alien_bounce_range:
-            self.bounce_dir *= -1  #
+            self.bounce_dir *= -1  
         self.rect.y = self.y 
 
-        # print(self.y)
+      
 
 
     def check_edges(self): #to make sure the alien stays in the rectangle
+        """
+        Check if the alien has hit the top or bottom edge of the screen.
+
+        Returns:
+            bool: True if alien hits top or bottom edge, else False.
+        """
         return (self.rect.top <= self.boundaries.top or
                 self.rect.bottom >= self.boundaries.bottom)
 

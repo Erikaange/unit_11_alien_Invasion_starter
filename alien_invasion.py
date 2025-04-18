@@ -38,6 +38,7 @@ class AlienInvasion:
             (self.settings.screen_w, self.settings.screen_h)
             )
 
+        # Initialize clock and game loop variables
         self.running = True
         self.clock = pygame.time.Clock()
         
@@ -69,8 +70,9 @@ class AlienInvasion:
             self.clock.tick(self.settings.FPS) 
 
     def _check_collisions(self):
-        #check collisions for ship
-        if self.ship.check_collisions(self.alien_fleet.fleet): #if true we want alien fleet to reset, alien fleet to reset, ship to recenter, subtract one life if possible
+        """Handle collisions between ships, aliens, bullets, and screen edges."""
+        
+        if self.ship.check_collisions(self.alien_fleet.fleet): # Check for alien-ship collisions
             self._check_game_status()
         #check collisioms for aliens and bottom of screem
         if self.alien_fleet._check_fleet_bottom():
@@ -86,6 +88,7 @@ class AlienInvasion:
             self._reset_level()
         
     def _check_game_status(self):
+        """Respond to collisions: reduce lives or end game."""
         if self.game_stats.ships_left > 0:
             self.game_stats.ships_left -= 1  
             self._reset_level() 
@@ -95,6 +98,7 @@ class AlienInvasion:
         
         
     def _reset_level(self): #decides what we want to do
+        """Reset the level by clearing bullets and recreating the alien fleet."""
         self.ship.arsenal.arsenal.empty()
         self.alien_fleet.fleet.empty() 
         self.alien_fleet.create_fleet() 
