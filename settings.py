@@ -33,8 +33,9 @@ class Settings:
         #alien settings
         self.alien_file = Path.cwd() /'Assets' / 'images' / 'spider.png'
         self.alien_w = 60
-        self.alien_h = 20
-        self.fleet_speed = 3 #sets the fleet speed
-        self.fleet_direction = 1
+        self.alien_h = 40
+        self.fleet_speed = 1 #sets the fleet speed
+        self.fleet_direction = -1
         self.fleet_drop_speed = 40 # the amount we are dropping out
-    
+        self.alien_bounce_speed = 1.0
+        self.alien_bounce_range = 30

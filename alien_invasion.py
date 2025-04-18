@@ -1,7 +1,7 @@
-# name: Lab11_Angeerika-1.py
+# name: Lab13_Angeerika-1.py
 # author: Angeerika
 # comment:Alien invasion project where the ship fires bullet from the midleft of the screen
-# date: 04/03/25
+# date: 04/18/25
 
 
 

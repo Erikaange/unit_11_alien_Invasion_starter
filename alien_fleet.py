@@ -13,7 +13,7 @@ class Alienfleet:
         self.game = game
         self.settings = game.settings
         self.fleet = pygame.sprite.Group()
-        self.fleet_direction = self.settings.fleet_direction
+        self.fleet_direction = -1 #self.settings.fleet_direction
         self.fleet_drop_speed = self.settings.fleet_drop_speed
 
         self.create_fleet() 
@@ -39,24 +39,24 @@ class Alienfleet:
                 current_y = alien_h * row + y_offset
 
             # Place aliens on the right edge, moving leftward
-                current_x = self.settings.screen_w - alien_w - x_offset  # Right side, no movement
+                current_x = self.settings.screen_w - alien_w - x_offset - (col * alien_h)  # Right side, no movement
 
                 if col % 2 == 0 or row % 2 == 0: #taking out every even number of alien
                     continue
                 self._create_alien(current_x, current_y)
 
-    def calculate_offsets(self, alien_w, alien_h, screen_w, fleet_w, fleet_h):
-        half_screen = self.settings.screen_h//2
+    def calculate_offsets(self, alien_w, alien_h, screen_h, fleet_w, fleet_h):
+        half_screen = self.settings.screen_w//2
         fleet_horizontal_space = fleet_w * alien_w
         fleet_vertical_space = fleet_h * alien_h
-        x_offset = int((screen_w - fleet_horizontal_space)//2)
+        x_offset = int((half_screen - fleet_horizontal_space)//2)
         y_offset = int((half_screen-fleet_vertical_space)//2)
         return x_offset,y_offset
 
 
     def calculate_fleet_size(self, alien_w, screen_w, alien_h, screen_h):
-        fleet_w = (screen_w//alien_w)
-        fleet_h = ((screen_h/2)//alien_h)
+        fleet_w = (screen_w//alien_w) #horizontal columns
+        fleet_h = (screen_h//alien_h) #vertical rows
 
         if fleet_w % 2 == 0:
             fleet_w -= 1
@@ -83,15 +83,17 @@ class Alienfleet:
         alien: Alien
         for alien in self.fleet:
             if alien.check_edges(): #make sure is checks the edge of the fleet
-                self._drop_alien_fleet()
-                self.fleet_direction *= -1
+                # self._drop_alien_fleet()
+                self.fleet_y_dir = 1
                
                 break #makes it to bounce back and forth
+               
+                # pass
 
 
     def _drop_alien_fleet(self):
         for alien in self.fleet:
-            alien.y += self.fleet_drop_speed
+            alien.y += self.fleet_drop_speed *3
 
 
     def update_fleet(self):#update every thing of the aliens
