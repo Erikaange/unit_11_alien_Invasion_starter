@@ -32,10 +32,18 @@ class Settings:
 
         #alien settings
         self.alien_file = Path.cwd() /'Assets' / 'images' / 'spider.png'
-        self.alien_w = 60
-        self.alien_h = 40
+        self.alien_w = 40
+        self.alien_h = 30
         self.fleet_speed = 1 #sets the fleet speed
         self.fleet_direction = -1
         self.fleet_drop_speed = 40 # the amount we are dropping out
         self.alien_bounce_speed = 1.0
         self.alien_bounce_range = 30
+
+        self.button_ = 200
+        self.button_h = 50
+        self.button_color = (0, 135, 50) #you can pick any color you want
+
+        self.text_color = (255, 255, 255)
+        self.button_font_size = 48
+        self.HUD_font_size = Path.cwd() /'Assets' / 'Fonts' / 'Caveat-Regular.ttf'
