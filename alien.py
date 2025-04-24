@@ -42,22 +42,23 @@ class Alien(Sprite):
         # Bouncing control
         self.original_y = y
         self.bounce_dir = 1  # 1 = down, -1 = up
-
+        self.bounce_range = self.settings.alien_bounce_range 
     def update(self):
         """Update the alien's position both horizontally and with bounce effect."""
         temp_speed = self.settings.fleet_speed
     
         self.x += temp_speed * self.fleet.fleet_direction
-        self.rect.x = self.x #update the rectangle 
+        self.rect.x = self.x 
+        
         
         
         
         # Vertical bounce movement
         self.y += self.settings.alien_bounce_speed * self.bounce_dir
-        if abs(self.y - self.original_y) >= self.settings.alien_bounce_range:
-            self.bounce_dir *= -1  
         self.rect.y = self.y 
 
+        if abs(self.y - self.original_y) >= self.settings.alien_bounce_range:
+            self.bounce_dir *= -1  
       
 
 

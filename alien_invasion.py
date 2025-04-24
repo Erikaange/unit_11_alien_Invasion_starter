@@ -1,7 +1,7 @@
-# name: Lab13_Angeerika-1.py
+# name: Lab14_Angeerika-1.py
 # author: Angeerika
 # comment:Alien invasion project where the ship fires bullet from the midleft of the screen
-# date: 04/18/25
+# date: 04/24/25
 
 
 
@@ -116,6 +116,12 @@ class AlienInvasion:
         self.alien_fleet.create_fleet() 
 
     def restart_game(self):
+        """
+            Resets the game to its initial state, allowing the player to restart the game.
+            This includes resetting the dynamic settings, game stats, HUD scores, level, ship,
+            and ensuring the game is active while hiding the mouse cursor.
+    
+            """
         self.settings.initialize_dynamic_settings() # setting up dynamic settings
         self.game_stats.reset_stats() #reset game stats
         self.HUD.update_scores() #update hud scores
