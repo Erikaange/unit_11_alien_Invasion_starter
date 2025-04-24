@@ -97,7 +97,7 @@ class AlienInvasion:
             self._reset_level()
             self.settings.increase_difficulty()
             self.game_stats.update_level() # update game stats level
-            # update hud view
+            self.HUD.update_level() # update hud view
         
     def _check_game_status(self):
         """Respond to collisions: reduce lives or end game."""
