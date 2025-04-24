@@ -12,6 +12,7 @@ class Settings:
         self.FPS = 60
         self.bg_file = Path.cwd() / 'Assets' / 'images' / 'Starbasesnow.png'
         self.difficulty_scale = 1.1
+        self.scores_file = Path.cwd() / 'Assets' / 'file' / 'scores.json'
 
 
         #screen settings
@@ -51,8 +52,9 @@ class Settings:
         self.bullet_speed =7
         self.bullet_amount = 100
 
-        self.fleet_speed = 2 #sets the fleet speed
+        self.fleet_speed = 0.5 #sets the fleet speed
         self.fleet_drop_speed = 40 # the amount we are dropping out
+        self.alien_points = 50
 
     def increase_difficulty(self):
         self.ship_speed *= self.difficulty_scale
