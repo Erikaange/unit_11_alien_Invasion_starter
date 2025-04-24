@@ -88,8 +88,10 @@ class AlienInvasion:
             self.impact_sound.play()
             self.impact_sound.fadeout(500)
         if self.alien_fleet.check_destroyed_status():
-
             self._reset_level()
+            self.settings.increase_difficulty()
+            # update game stats level
+            # update hud view
         
     def _check_game_status(self):
         """Respond to collisions: reduce lives or end game."""
@@ -108,7 +110,7 @@ class AlienInvasion:
         self.alien_fleet.create_fleet() 
 
     def restart_game(self):
-        # setting up dynamic settings
+        self.settings.initialize_dynamic_settings() # setting up dynamic settings
         #reset game stats
         #update hud scores
         self._reset_level() #reset the level
@@ -121,6 +123,7 @@ class AlienInvasion:
         self.screen.blit(self.bg, (0, 0)) 
         self.alien_fleet.draw()
         self.ship.draw() 
+        # draw hud
 
         if not self.game_active:
             self.play_button.draw()
